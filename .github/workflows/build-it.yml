@@ -18,7 +18,7 @@ jobs:
             --env BP_MAVEN_BUILD_ARGUMENTS="-Dmaven.test.skip=true --no-transfer-progress package --batch-mode" \
             --env BP_MAVEN_BUILT_ARTIFACT=target/
   create-arm-package:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
