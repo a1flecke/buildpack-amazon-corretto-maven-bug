@@ -1,4 +1,5 @@
 name: Pack Build
+on: push
 jobs:
   create-amd-package:
     runs-on: ubuntu-latest
