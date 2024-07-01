@@ -1,0 +1,34 @@
+name: Pack Build
+jobs:
+  create-amd-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Pack
+        uses: buildpacks/github-actions/setup-pack@v5.0.0
+      - name: Build and push
+        run: |
+          pack build --verbose --timestamps corretto-bug \
+            --platform linux/amd64 \
+            --builder paketobuildpacks/builder-jammy-tiny \
+            --buildpack paketo-buildpacks/amazon-corretto,paketo-buildpacks/java \
+            --env BP_JVM_VERSION=21 \
+            --env BP_MAVEN_BUILD_ARGUMENTS="-Dmaven.test.skip=true --no-transfer-progress package --batch-mode" \
+            --env BP_MAVEN_BUILT_ARTIFACT=target/
+  create-arm-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Pack
+        uses: buildpacks/github-actions/setup-pack@v5.0.0
+      - name: Build and push
+        run: |
+          pack build --verbose --timestamps corretto-bug \
+            --platform linux/arm64 \
+            --builder paketobuildpacks/builder-jammy-tiny \
+            --buildpack paketo-buildpacks/amazon-corretto,paketo-buildpacks/java \
+            --env BP_JVM_VERSION=21 \
+            --env BP_MAVEN_BUILD_ARGUMENTS="-Dmaven.test.skip=true --no-transfer-progress package --batch-mode" \
+            --env BP_MAVEN_BUILT_ARTIFACT=target/
