@@ -1,5 +1,5 @@
 pack build --verbose --timestamps corretto-bug \
-  --platform ${BUILDPACKS_PLATFORM} \
+  --platform linux/arm64 \
   --builder paketobuildpacks/builder-jammy-tiny \
   --buildpack paketo-buildpacks/amazon-corretto,paketo-buildpacks/java \
   --env BP_JVM_VERSION=21 \
